@@ -70,9 +70,23 @@
   <script src="../../common/js/jquery.js"></script>
   <script>
   // 第1問  id='q1'の要素の文字色を赤色にせよ。
+  $('#q1').css('color', 'red');
   // 第2問  id='q2'の要素をクリックしたら背景色をピンクにせよ。
+  $('#q2').click(function(){
+    $(this).css('background-color','fuchsia')
+  })//('#q2').の代わり。。。
+
   // 第3問  id='q3'の要素をクリックしたら2秒かけてフェードアウトさせよ。
+  $('#q3').click(function(){
+    $(this).fadeOut(2000);
+  })
   // 第4問  id='q4'の要素をクリックしたらこの要素の前後とこの要素内の前後にテキストを挿入せよ。
+  $('#q4').click(function(){
+    $(this).before('DOMの前');
+    $(this).prepend('DOMの中の後');
+    $(this).append('DOMの中の前');
+    $(this).after('DOMの後');
+  })
   // 第5問  id='q5'の要素をクリックしたらこの要素にlargeというクラスを付与せよ。
   // 第6問  id='q6'の要素をクリックしたらこの要素を2秒かけてmargin-topとmargin-leftを100pxの位置に移動させよ。
   // 第7問  id='q7'の子要素をクリックしたら、その要素のインデックス（何番目か）をconsole.log()とalert()を用いて表示させよ。
