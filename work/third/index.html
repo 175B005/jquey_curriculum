@@ -30,7 +30,21 @@
       // .eq() 引数に応じたindexの要素を指定します。
       // .addClass() クラスを追加します。
       // .removeClass() クラスを削除します。
+
+      $('.nav').find('li').click(function(){
+        var index = $(this).index();
+        var size = $('.nav').find('li').length;
+        //clickに入っているので3がとれなかった。↑
+
+        for(var i = 0; i < size; i++){
+          $('.contents').find('li').eq(i).addClass('is-hidden')
+          //とりあえずすべて非表示にする。
+        }
+
+        $('.contents').find('li').eq(index).removeClass('is-hidden')
+        //クリックした番号のタブだけis-hiddenを消す。
+      });
+
     </script>
   </body>
 </html>
-
