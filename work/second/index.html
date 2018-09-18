@@ -28,21 +28,24 @@
       // .fadeIn() 一定時間かけてフェードインする。
       // .fadeOut() 一定時間かけてフェードアウトする。
 
-      $('.modal-show').click(function(){
-        $('.modal').fadeIn(500)
-        //$(this).find('.modal').fadeIn(1000);
-        //子要素じゃない？？わからない。。このアクセスはできない。
-      });
-      $('.modal-close').click(function(){
-        $('.modal').fadeOut(500)
-      });
-      //onでclickのイベントができる
-      //複数イベントを管理するのに便利。
-      //$('.oo').on({
-      //'mouseenter': function(){...},入る時
-      //'mouseleave': function(){...}残ってる時
-      //});
+      function(){
+        
+        $('.modal-show').click(function(){
+          $('.modal').fadeIn(500)
+          //$(this).find('.modal').fadeIn(1000);
+          //子要素じゃない？？わからない。。このアクセスはできない。
+        });
+        $('.modal-close').click(function(){
+          $('.modal').fadeOut(500)
+        });
+        //onでclickのイベントができる
+        //複数イベントを管理するのに便利。
+        //$('.oo').on({
+        //'mouseenter': function(){...},入る時
+        //'mouseleave': function(){...}残ってる時
+        //});
 
+      }
     </script>
   </body>
 </html>
