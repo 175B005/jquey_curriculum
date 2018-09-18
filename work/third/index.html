@@ -31,7 +31,7 @@
       // .addClass() クラスを追加します。
       // .removeClass() クラスを削除します
 
-      function(){
+      $(function(){
 
         $('.nav').find('li').click(function(){
           var index = $(this).index();
@@ -42,8 +42,8 @@
           $('.contents').find('li').eq(index).removeClass('is-hidden')
           //クリックした番号のタブだけis-hiddenを消す。
         });
-        
-      }
+
+      });
 
     </script>
   </body>

@@ -26,7 +26,28 @@
       // .keyup() 文字入力後に発火されるイベントです。
       // .replace(/\s+/g,'').length 改行を含まない文字数を取得します。
       // .val() input要素のvalueを取得します。
+
+      $(function(){
+        var veiwNumber = 30;
+
+        $('.input').keyup(function(){
+
+          var inputText = $(this).val();
+          var number = inputText.replace(/\s+/g,'').length;
+          //replaceがテキストを分割するもので、splitみたいなやーつ。
+          //lengthで一文字に分割した個数を取得ー＞という流れ。。
+          console.log(number);
+          veiwNumber = 30 - number;
+          $('div > p').text(veiwNumber);
+
+          if(veiwNumber < 0){//マイナス値
+            $('div > p').addClass('red');
+          }else{//０＋自然数
+            $('div > p').removeClass('red');
+          }
+        });
+      });
+
     </script>
   </body>
 </html>
-
