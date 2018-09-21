@@ -51,15 +51,14 @@
           //console.log(topScroll);//自分視位置
           if(topScroll >= 100){
             $('.scrollTopBtn').fadeIn(500);
-          }
-          else{
+          }else{
             $('.scrollTopBtn').fadeOut(500);
           }
         });
 
         //topボタン
         $('.scrollTopBtn').on('click',function(){
-          $('html,body').animate({//スクロール画面全体の時はhtml,bodyで指定？
+          $('body').animate({//スクロール画面全体の時はhtml,bodyで指定？
             'scrollTop': 0
           });
 
