@@ -99,24 +99,31 @@
       // $().each() DOM要素を1つずつループ処理をする（ループ内で$(this)を使うと要素がひとつずつ取得できる）
 
       $(function(){
+
         $('.select').change(function(){
           var val = $(this).val();
           console.log(val);
           //javscript 選択 -> javascript
           Update(val);
+
+          if(val === 'all'){
+            $('.list > li').show();
+          }
         });
         function Update(val){
-          $('.list > li').each(function(){
-            var category = $(this).data('category-type');
+          $('.list > li').each(function(index, item){
+            console.log(index ,item);
+            console.log(this);
+
+            var category = $(item).data('category-type');
             console.log(category);
             //全てのli要素検索（category-type）
 
-            if(val == 'all' || val == category){
-              //特殊（all表示）あるいは　カテゴリー一致。
-              $(this).show();
+            if(val === category){//カテゴリー一致。
+              $(item).show();
             }
             else{//不一致
-              $(this).hide();
+              $(item).hide();
             }
           });
         }

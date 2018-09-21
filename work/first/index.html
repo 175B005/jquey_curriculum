@@ -72,7 +72,10 @@
 
   $(function(){
     // 第1問  id='q1'の要素の文字色を赤色にせよ。
-    $('#q1').css('color', 'red');
+    $('#q1').css({
+      color: 'red',
+      backgroundColor: '#fff'
+    });
     // 第2問  id='q2'の要素をクリックしたら背景色をピンクにせよ。
     $('#q2').click(function(){
         $(this).css('background-color','fuchsia')
@@ -94,7 +97,7 @@
       $(this).addClass('large')
     });
     // 第6問  id='q6'の要素をクリックしたらこの要素を2秒かけてmargin-topとmargin-leftを100pxの位置に移動させよ。
-    $('#q6').click(function(){
+    $('#q6 li').click(function(){
       $(this).animate({
         'margin-top': 100,
         'margin-left': 100

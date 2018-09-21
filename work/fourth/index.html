@@ -61,6 +61,8 @@
 
         $('.menu__list li').hover(function(){//第1引数
           $("ul.menu__list__childList", this).stop().slideDown();
+          //$(this).find('ul.menu__list__childList').stop().slideDown();と同じ
+
         },function(){//第2引数
           $("ul.menu__list__childList",this).stop().slideUp();
         });

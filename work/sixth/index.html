@@ -12,9 +12,9 @@
   <body>
     <div class="wrapper">
       <form class="register">
-        <div class="input-wrapper">
+        <div class="input-wrapper">++
           <input type="text" class="input" placeholder="Input Your Name.">
-          <p class="rest-count">30</p>
+          <p class="rest-count"></p>
         </div>
         <button class="register-btn">Register</button>
       </form>
@@ -28,22 +28,23 @@
       // .val() input要素のvalueを取得します。
 
       $(function(){
-        var veiwNumber = 30;
+        var maxLength = 40;
+        $('.rest-count').text(maxLength);
 
         $('.input').keyup(function(){
 
           var inputText = $(this).val();
-          var number = inputText.replace(/\s+/g,'').length;
-          //replaceがテキストを分割するもので、splitみたいなやーつ。
+          var textLength = inputText.replace(/\s+/g,'').length;
+          //replaceがテキストを分割するもので、splitみたいなやーつ。v
           //lengthで一文字に分割した個数を取得ー＞という流れ。。
-          console.log(number);
-          veiwNumber = 30 - number;
-          $('div > p').text(veiwNumber);
+          console.log(textLength);
+          var veiwNumber = maxLength - textLength;
+          $('.rest-count').text(veiwNumber);
 
           if(veiwNumber < 0){//マイナス値
-            $('div > p').addClass('red');
+            $('.rest-count').addClass('red');
           }else{//０＋自然数
-            $('div > p').removeClass('red');
+            $('.rest-count').removeClass('red');
           }
         });
       });
