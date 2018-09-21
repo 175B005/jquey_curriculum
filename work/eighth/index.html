@@ -42,6 +42,44 @@
       // .offset().top 要素の位置を取得します。
       // .fadeIn() 要素をフェードインさせる。
       // .fadeOut() 要素をフェードアウトさせる。
+
+      $(function(){
+        //topボタンフェード
+        $(this).scroll(function(){//常に発火してしまうがいい方法は？
+
+          var topScroll = $(this).scrollTop();
+          //console.log(topScroll);//自分視位置
+          if(topScroll >= 100){
+            $('.scrollTopBtn').fadeIn(500);
+          }
+          else{
+            $('.scrollTopBtn').fadeOut(500);
+          }
+        });
+
+        //topボタン
+        $('.scrollTopBtn').on('click',function(){
+          $('html,body').animate({//スクロール画面全体の時はhtml,bodyで指定？
+            'scrollTop': 0
+          });
+
+        });
+
+        //ボタン対応、画面スクロール
+        $('.menu__btn').on('click',function(){
+
+          var scrollPlaceType = $(this).data('scroll-place-type');//押されたボタンの属性
+          console.log(scrollPlaceType);
+
+          var scrollPlace = $('.contents [data-scroll-place-type=' + scrollPlaceType + ']').offset().top;
+          console.log(scrollPlace);
+          $('html,body').animate({//スクロール画面全体の時はhtml,bodyで指定？
+            'scrollTop': scrollPlace
+          });
+
+        });
+
+      });
     </script>
   </body>
 </html>
