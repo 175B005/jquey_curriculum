@@ -30,14 +30,16 @@
         type: 'get',//postは送る
         url: './data.json',//階層（ＵＲＬ）
         dataType: 'json'//データの型
-        })
-        .done(function(data) {
+      }).done(function(data) {
         console.log(data);
         var colorsArray = data.colorsArray;
 
-        $.each(colorsArray,function(i){
-          $('.colorList').append('<li class="colorList__item"><p class="colorList__title" style="background-color: ' + colorsArray[i].hexValue + ';">' + colorsArray[i].colorName + '</p></li>')
-        })
+        var addHtml = '';
+        $.each(colorsArray,function(i, color){
+          addHtml += '<li class="colorList__item"><p class="colorList__title" style="background-color: ' + color.hexValue + ';">' + color.colorName + '</p></li>'
+        });
+        $('.colorList').html(addHtml);
+        //個別にappendではなくhtmlで一気に。。
 
       });
 
