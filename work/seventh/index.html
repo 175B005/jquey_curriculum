@@ -37,10 +37,17 @@
       $(function(){
 
         var position = 0;//初期位置　０番
-        var listWidth = $('.slider-list').children().width();
-        console.log(listWidth);//途中！！！
-
+        var listLength = $('.slider-list').find('li').length;//4
         var imagePosition = [];//ポジション設定
+        var gazeItem = $('.slider-list').children();
+
+        imagePosition[position] = 0;
+        for(var i = 1; i <= listLength; i++){
+
+          imagePosition[i] = imagePosition[i - 1] + gazeItem.width();
+          gazeItem = gazeItem.next();
+          console.log(imagePosition[i]);
+        }
 
         $('.slider-ctrl-btn').on('click',function(){
 
