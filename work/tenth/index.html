@@ -63,7 +63,51 @@
       // }).done(function(data) {
       //   // この中にデータ取得後の動きを記述していきます。
       // });
-      //
+
+      //----------------------------------------------
+      /*$.ajax({
+        url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+        type: 'GET',
+        datatype: 'json',
+        data: {
+          // 「区分:サービス固有パラメーター」↓
+          applicationId: '1019399324990976605',
+          booksGenreId: '001'
+        },
+      }).done(function(data) {
+        // この中にデータ取得後の動きを記述していきます。
+
+        console.log(data);//とりま、何が来るのか確認。
+
+      });*/
+
+      $('#js-search-button').on('click',function(){
+        var cmpValue = document.getElementById("js-search-word").value;//Ｖａｌｕｅに引数
+        console.log(cmpValue);
+      })
+
+      function OnSearch(Value){
+        //リクエストを受け、データをinputから引数で取得、比較を繰り返す。
+        //検索引っかかったやつを配列に入れておくDisplayに持っていく。
+        var targetValue = '';//ここは長々オブジェクト内のデータを降りて、わかりやすく。
+        //if(){}//含まれているかどうか？？
+      }
+
+      function Display(matterArray,dispNumber){
+        //引数は３次元配列,配列の個数
+        //検索処理完了後表示処理
+      }
+
+      function ErrorMessage(){
+        alart('何らかの通信エラーが発生しました。\nデータ取得できません。m(_)m');
+        //アラートではない
+      }
+
+      function ZeroError(){
+        alart('検索結果が見つかりませんでした。\n別のキーワードで検索して下さい。');
+        //アラートではない
+      }
+
     </script>
   </body>
 </html>
