@@ -137,7 +137,7 @@
         Initialize();
         var SearchTitle = document.getElementById("js-search-word").value;//Input検索ワード
         //console.log(SearchTitle);
-        if(SearchTitle.match(/ /) === null){
+        if(SearchTitle.match(/ /) == null && SearchTitle.length > 1){
           AjaxReqest(SearchTitle);
         }else{
           //console.log('入力が不正です。\nスペース禁止（検索ワード１つ）、ＵＴＦ－８文字列');
