@@ -65,31 +65,54 @@
       // });
 
       //----------------------------------------------
+
+      //「検索」クリック
+      $('#js-search-button').on('click',function(){
+        Initialize();
+        var SearchTitle = document.getElementById("js-search-word").value;//Input検索ワード
+        //console.log(SearchTitle);
+        if(SearchTitle.match(/ /) == null){
+          if(SearchTitle.length > 1){
+            //検索可能
+            AjaxReqest(SearchTitle);
+          }else{//1文字0文字
+            var addErrorMas = "<div class='message'><p>文字数が少なすぎます。<br>２文字以上で検索して下さい。</p></div>";
+            $('.wrap').find('.search').after(addErrorMas);
+          }
+        }else{//空文字２ワード
+          var addErrorMas = "<div class='message'><p>空文字が入力されています。<br>単体で入力して下さい。</p></div>";
+          $('.wrap').find('.search').after(addErrorMas);
+        }
+      });
+
       function AjaxReqest(SearchTitle){
 
         $.ajax({
-          url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+          url
+          : 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
           type: 'GET',
-          datatype: 'json',
+          datatype: 'json',//objectでもいけた。。。
           data: {
             //検索キーワード↓
             keyword: SearchTitle,
+            hits: 20,
             // 「区分:サービス固有パラメーター」↓
             applicationId: '1019399324990976605',
             booksGenreId: '001'
           },
         }).done(function(data) {
-          // この中にデータ取得後の動きを記述していきます。
-          //console.log(data);//とりま、何が来るのか確認。
-          if(data == null){//データがない
-            ErrorMessage();
-          }
+          console.log(data);
+
           if(data.count > 0){//データが０件以上かどうか。
             //console.log(data.count + '件 Hit!!');
             Display(data);
           }else{
-            ZeroError();//データ０
+            var addFailMas = "<div class='message'><p>検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p></div>";
+            $('.wrap').find('.search').after(addFailMas);
           }
+        }).fail(function(data,errorCause){
+          var addErrorMas = "<div class='message'><p>" + errorCause + "!!<br>データが取得できませんでした。<br>通信を再度確認してください。</p></div>";
+          $('.wrap').find('.search').after(addErrorMas);
         });
       }
 
@@ -103,15 +126,11 @@
           $('.wrap').find('.lists').empty();
         }
       }
-      var MaxDisp = 20;
+
       function Display(dataJson){//メインのList画像表示
 
         var addHtml = "";
         $.each(dataJson.Items,function(i, dataItems){
-
-          if(i >= MaxDisp){
-            return false;
-          }
 
           addHtml += "<li class='lists__item'><div class='lists__item__inner'><a href='" + dataItems.Item.itemUrl + "' class='lists__item__link' target='_blank'><img src='" + dataItems.Item.largeImageUrl + "' class='lists__item__img' alt='" + dataItems.Item.title + "'><p class='lists__item__detail'>作品名：　" + dataItems.Item.title + "</p><p class='lists__item__detail'>作者　：　" + dataItems.Item.author + "</p><p class='lists__item__detail'>出版社：　" + dataItems.Item.publisherName + "</p><a></div></li>";
 
@@ -119,31 +138,6 @@
         });
         $('.lists').html(addHtml);
       }
-
-      function ErrorMessage(){
-        //console.log('データ取得エラー');
-        var addErrorMas = "<div class='message'><p>データが取得できませんでした。<br>通信を再度確認してください。</p></div>";
-        $('.wrap').find('.search').after(addErrorMas);
-      }
-
-      function ZeroError(){
-        //console.log('0件です');
-        var addZeroMas = "<div class='message'><p>検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p></div>";
-        $('.wrap').find('.search').after(addZeroMas);
-      }
-
-      //「検索」クリック
-      $('#js-search-button').on('click',function(){
-        Initialize();
-        var SearchTitle = document.getElementById("js-search-word").value;//Input検索ワード
-        //console.log(SearchTitle);
-        if(SearchTitle.match(/ /) == null && SearchTitle.length > 1){
-          AjaxReqest(SearchTitle);
-        }else{
-          //console.log('入力が不正です。\nスペース禁止（検索ワード１つ）、ＵＴＦ－８文字列');
-          ErrorMessage();
-        }
-      });
 
     </script>
   </body>
