@@ -70,19 +70,22 @@
       $('#js-search-button').on('click',function(){
         Initialize();
         var SearchTitle = document.getElementById("js-search-word").value;//Input検索ワード
+        AjaxReqest(SearchTitle);
+        //どんな値でもリクエストしてみて、done fail でわければおｋ!
+
         //console.log(SearchTitle);
-        if(SearchTitle.match(/ /) == null){
-          if(SearchTitle.length > 1){
-            //検索可能
-            AjaxReqest(SearchTitle);
-          }else{//1文字0文字
-            var addErrorMas = "<div class='message'><p>文字数が少なすぎます。<br>２文字以上で検索して下さい。</p></div>";
-            $('.wrap').find('.search').after(addErrorMas);
-          }
-        }else{//空文字２ワード
-          var addErrorMas = "<div class='message'><p>空文字が入力されています。<br>単体で入力して下さい。</p></div>";
-          $('.wrap').find('.search').after(addErrorMas);
-        }
+        // if(SearchTitle.match(/ /) == null){
+        //   if(SearchTitle.length > 1){
+        //     //検索可能
+        //     AjaxReqest(SearchTitle);
+        //   }else{//1文字0文字
+        //     var addErrorMas = "<div class='message'><p>文字数が少なすぎます。<br>２文字以上で検索して下さい。</p></div>";
+        //     $('.wrap').find('.search').after(addErrorMas);
+        //   }
+        // }else{//空文字２ワード
+        //   var addErrorMas = "<div class='message'><p>空文字が入力されています。<br>単体で入力して下さい。</p></div>";
+        //   $('.wrap').find('.search').after(addErrorMas);
+        // }
       });
 
       function AjaxReqest(SearchTitle){
@@ -110,8 +113,11 @@
             var addFailMas = "<div class='message'><p>検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p></div>";
             $('.wrap').find('.search').after(addFailMas);
           }
-        }).fail(function(data,errorCause){
-          var addErrorMas = "<div class='message'><p>" + errorCause + "!!<br>データが取得できませんでした。<br>通信を再度確認してください。</p></div>";
+        }).fail(function(jqXHR, textStatus, errorThrown){
+          //console.log(jqXHR.status);//400,200
+          //console.log(textStatus);//error,persererror
+          //console.log(jqXHR);//undefind
+          var addErrorMas = "<div class='message'><p>" + textStatus + "!!<br>データが取得できませんでした。<br>通信を再度確認してください。</p></div>";
           $('.wrap').find('.search').after(addErrorMas);
         });
       }
