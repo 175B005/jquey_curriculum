@@ -114,10 +114,16 @@
             $('.wrap').find('.search').after(addFailMas);
           }
         }).fail(function(jqXHR, textStatus, errorThrown){
-          //console.log(jqXHR.status);//400,200
-          //console.log(textStatus);//error,persererror
-          //console.log(jqXHR);//undefind
-          var addErrorMas = "<div class='message'><p>" + textStatus + "!!<br>データが取得できませんでした。<br>通信を再度確認してください。</p></div>";
+          //console.log(jqXHR);
+          //console.log(textStatus);
+          //console.log(errorThrown);
+          if(jqXHR.readyState != 4){//レスポンス取得できたか？
+            var addErrorMas = "<div class='message'><p>!!通信エラー<br>データが取得できませんでした...</p></div>";
+          }else{
+            var ErrorMes = jqXHR.responseJSON.error + "!<br>" + jqXHR.responseJSON.error_description;
+
+            var addErrorMas = "<div class='message'><p>" + ErrorMes + "!!<br>データが取得できませんでした...</p></div>";
+          }
           $('.wrap').find('.search').after(addErrorMas);
         });
       }
